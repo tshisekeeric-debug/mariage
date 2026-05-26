@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitation de Mariage - Eric & Prescillia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400;0,600;1,400&family=Montserrat:wght=200;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        
+        @keyframes subtle-zoom { 
+            0% { transform: scale(1); } 
+            100% { transform: scale(1.05); } 
+        }
+        .animate-subtle-zoom { animation: subtle-zoom 15s infinite alternate ease-in-out; }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .fade-in { animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased">
+
+    <div id="app" class="min-h-screen flex justify-center items-center p-0 sm:p-4 bg-gradient-to-br from-stone-100 to-stone-200">
+        <div class="max-w-md w-full bg-white shadow-2xl sm:rounded-2xl overflow-hidden relative min-h-screen sm:min-h-[85vh] flex flex-col border border-stone-200/50" id="main-container">
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURATION CORRIGÉE ET ADAPTÉE
+        const weddingData = {
+            groom: "Eric",
+            bride: "Prescillia",
+            date: "29 Août 2026",
+            time: "20h30",
+            location: "Salle EXOTIC",
+            address: "Gramalic 107, Réf. Kinshasa",
+            mapUrl: "https://maps.google.com/?q=Salle+EXOTIC+Gramalic+107+Kinshasa", // Lien de navigation
+            program: [
+                { time: "10:45", event: "Mariage Civil / Mairie", desc: "Célébration officielle dans la salle EXOTIC" },
+                { time: "20:30", event: "Soirée Dansante", desc: "Dîner de prestige, ouverture du bal et festivités" }
+            ]
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const guestInfo = {
+            name: params.get('guest') || 'Cher Invité',
+            table: params.get('table') || 'Honneur'
+        };
+
+        // Gestion de l'état local pour les onglets
+        let currentTab = 'program'; 
+
+        function setView(viewName) {
+            render(viewName);
+        }
+
+        function switchTab(tabName) {
+            currentTab = tabName;
+            render('invitation');
+        }
+
+        function render(view) {
+            const container = document.getElementById('main-container');
+            if (!container) return;
+            
+            if (view === 'envelope') {
+                container.innerHTML = `
+                    <div class="absolute inset-0 z-50 bg-stone-100 flex flex-col items-center justify-between p-8 cursor-pointer fade-in shadow-inner" onclick="setView('invitation')">
+                        <div class="w-full flex justify-center pt-8">
+                            <div class="h-px w-16 bg-stone-300"></div>
+                        </div>
+                        
+                        <div class="text-center space-y-4 my-auto">
+                            <p class="text-stone-400 uppercase tracking-[0.25em] text-[10px] font-medium">Faire-part de mariage</p>
+                            <h3 class="text-xs text-amber-800 uppercase tracking-widest font-semibold">${weddingData.groom} & ${weddingData.bride}</h3>
+                            <div class="py-6">
+                                <p class="text-stone-400 italic text-[11px] mb-1">Invitation personnelle pour</p>
+                                <h2 class="text-3xl font-light text-stone-800 serif tracking-wide">${guestInfo.name}</h2>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col items-center space-y-4 pb-8 transition-transform duration-300 hover:scale-105">
+                            <div class="w-16 h-16 bg-gradient-to-br from-amber-600 to-amber-800 rounded-full flex items-center justify-center shadow-xl border-2 border-amber-500/30 ring-4 ring-amber-700/10">
+                                <span class="text-white font-light tracking-tighter text-sm serif">${weddingData.groom[0]}&${weddingData.bride[0]}</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-stone-400 text-[10px] uppercase tracking-[0.3em] font-medium animate-pulse">
+                                <span>Ouvrir l'invitation</span>
+                                <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } 
+            else if (view === 'invitation') {
+                // Rendu conditionnel de la zone centrale selon l'onglet actif
+                let dynamicContent = '';
+
+                if (currentTab === 'program') {
+                    dynamicContent = `
+                        <div class="space-y-12 fade-in">
+                            <section class="bg-white p-6 rounded-2xl border border-stone-200/60 shadow-sm space-y-3">
+                                <p class="text-[10px] uppercase tracking-widest text-stone-400 font-medium">Place réservée pour</p>
+                                <h3 class="text-xl font-medium text-stone-800 serif">${guestInfo.name}</h3>
+                                <div class="w-8 h-px bg-amber-700/30 mx-auto my-1"></div>
+                                <div class="inline-flex items-center gap-2 text-amber-800">
+                                    <i data-lucide="armchair" class="w-4 h-4"></i>
+                                    <p class="text-[10px] font-semibold uppercase tracking-widest">Table : ${guestInfo.table}</p>
+                                </div>
+                            </section>
+                            
+                            <section class="bg-slate-900 p-6 rounded-2xl shadow-xl space-y-8 border border-slate-800">
+                                <div class="flex items-center justify-center gap-4">
+                                    <div class="h-px flex-1 bg-gradient-to-r from-transparent to-slate-700"></div>
+                                    <div class="flex items-center gap-2 text-white">
+                                        <i data-lucide="calendar-days" class="text-amber-400 w-4 h-4"></i>
+                                        <h3 class="text-[10px] uppercase tracking-[0.25em] font-bold">Programme du Jour</h3>
+                                    </div>
+                                    <div class="h-px flex-1 bg-gradient-to-l from-transparent to-slate-700"></div>
+                                </div>
+
+                                <div class="space-y-8 text-left max-w-[280px] mx-auto relative pl-6">
+                                    <div class="absolute left-[30px] top-2 bottom-2 w-px bg-amber-400/20"></div>
+
+                                    ${weddingData.program.map((item, i) => `
+                                        <div class="flex gap-6 relative items-start">
+                                            <div class="w-[9px] h-[9px] rounded-full border border-amber-400 bg-amber-400 shadow-sm z-10 mt-1.5 -ml-[5px]"></div>
+                                            <div class="flex flex-col space-y-0.5">
+                                                <span class="text-[10px] font-bold text-amber-400 tracking-wider">${item.time}</span>
+                                                <span class="text-sm font-medium text-white">${item.event}</span>
+                                                <span class="text-xs text-slate-400 font-light">${item.desc}</span>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </section>
+                        </div>
+                    `;
+                } else if (currentTab === 'map') {
+                    dynamicContent = `
+                        <div class="space-y-6 fade-in">
+                            <section class="bg-stone-100/60 p-6 rounded-2xl border border-stone-200/40 space-y-4">
+                                <div class="w-8 h-8 bg-amber-800/10 rounded-full flex items-center justify-center mx-auto text-amber-800">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest font-bold text-stone-400">Lieu de réception</p>
+                                    <p class="text-lg font-medium serif text-stone-800 leading-tight mt-1">${weddingData.location}</p>
+                                    <p class="text-stone-500 font-light text-xs mt-1 px-4">${weddingData.address}</p>
+                                </div>
+                                
+                                <div class="pt-2">
+                                    <a href="${weddingData.mapUrl}" target="_blank" rel="noopener noreferrer" 
+                                       class="inline-flex items-center gap-2 bg-stone-900 text-stone-100 px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider font-medium shadow-sm hover:bg-stone-800 transition-colors">
+                                        <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-400"></i>
+                                        Ouvrir Google Maps
+                                    </a>
+                                </div>
+                            </section>
+                            <p class="text-[11px] text-stone-400 font-light italic px-6 leading-relaxed">
+                                Un parking sécurisé est à votre disposition à l'adresse indiquée.
+                            </p>
+                        </div>
+                    `;
+                }
+
+                // Structure principale avec la zone de défilement et la barre fixe inférieure
+                container.innerHTML = `
+                    <div class="flex-1 overflow-y-auto no-scrollbar scroll-smooth bg-stone-50/40 pb-24">
+                        <div class="relative h-[45vh] flex items-end justify-center pb-12 overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-b from-stone-900/20 via-transparent to-stone-50 z-10"></div>
+                            <div class="absolute inset-0 bg-[url('ma-photo.jpg')] bg-cover bg-center scale-105 animate-subtle-zoom"></div>
+                            <div class="relative z-20 text-center px-4 space-y-2">
+                                <h1 class="text-4xl font-light text-stone-900 tracking-wide">${weddingData.groom} <span class="text-2xl font-serif italic text-amber-800">&</span> ${weddingData.bride}</h1>
+                                <div class="inline-block bg-white/80 backdrop-blur-sm px-4 py-1 rounded-full border border-stone-200/40 shadow-sm">
+                                    <p class="uppercase tracking-[0.25em] text-stone-700 text-[9px] font-semibold">${weddingData.date}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-8 text-center">
+                            ${dynamicContent}
+
+                            <footer class="pt-8 pb-4 text-stone-400 text-[9px] uppercase tracking-[0.35em] border-t border-stone-200/60 mt-12">
+                                <p class="mb-4 text-stone-500 font-serif italic normal-case tracking-normal text-sm">Nous serions honorés de vous compter parmi nous.</p>
+                                <div class="font-medium text-stone-600 mt-6">${weddingData.groom} & ${weddingData.bride}</div>
+                            </footer>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-0 inset-x-0 bg-white/90 backdrop-blur-md border-t border-stone-200/60 h-16 flex items-center justify-around px-8 z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.02)]">
+                        <button onclick="switchTab('program')" class="flex flex-col items-center space-y-1 w-20 transition-all ${currentTab === 'program' ? 'text-amber-800 scale-105 font-medium' : 'text-stone-400'}">
+                            <i data-lucide="info" class="w-4 h-4 ${currentTab === 'program' ? 'stroke-[2.5px]' : 'stroke-[1.5px]'}"></i>
+                            <span class="text-[9px] uppercase tracking-widest">Programme</span>
+                        </button>
+                        
+                        <div class="w-px h-6 bg-stone-200"></div>
+
+                        <button onclick="switchTab('map')" class="flex flex-col items-center space-y-1 w-20 transition-all ${currentTab === 'map' ? 'text-amber-800 scale-105 font-medium' : 'text-stone-400'}">
+                            <i data-lucide="map" class="w-4 h-4 ${currentTab === 'map' ? 'stroke-[2.5px]' : 'stroke-[1.5px]'}"></i>
+                            <span class="text-[9px] uppercase tracking-widest">Plan & GPS</span>
+                        </button>
+                    </div>
+                `;
+            }
+            lucide.createIcons();
+        }
+
+        window.onload = () => render('envelope');
+    </script>
+</body>
+</html>
