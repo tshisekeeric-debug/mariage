@@ -1,4 +1,3 @@
-<!-- STREAMING_CHUNK: Setting up luxury document head with deep blue and gold design tokens... -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitation de Mariage - Eric & Prescillia</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@200;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
@@ -28,31 +27,79 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Ombre douce pour le carton blanc d'art */
-        .blue-shadow-soft {
-            box-shadow: 0 10px 30px -10px rgba(2, 2, 40, 0.15), inset 0 0 15px rgba(2, 2, 40, 0.02);
+        /* 1. Texture originale rouge bordeaux (Pour la Première Page) */
+        .ethnic-bordeaux-bg {
+            background-color: #991b1b; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%237f1d1d' stroke-width='2'/%3E%3Cpath d='M30 10 L50 30 L30 50 L10 30 Z' fill='none' stroke='%237f1d1d' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='3' fill='%237f1d1d'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* 2. Même texture mais version Fond Bleu Nuit Royal Lumineux (Pour la Deuxième Page) */
+        .ethnic-midnight-blue-bg {
+            background-color: #03071e; /* Base bleu nuit très sombre */
+            background-image: 
+                radial-gradient(circle at top left, rgba(30, 58, 138, 0.6), transparent 70%),
+                radial-gradient(circle at bottom right, rgba(29, 78, 216, 0.4), transparent 80%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%231e3a8a' stroke-width='1.5' stroke-opacity='0.4'/%3E%3Cpath d='M30 10 L50 30 L30 50 L10 30 Z' fill='none' stroke='%231e3a8a' stroke-width='1' stroke-opacity='0.3'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%231e3a8a' fill-opacity='0.3'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* Animation 1 : Cœurs montants pour la première page (Enveloppe) */
+        .heart-envelope {
+            position: absolute;
+            bottom: -20px;
+            pointer-events: none;
+            animation: floatUp 7s linear forwards;
+            opacity: 0;
+            z-index: 40;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0) scale(0.6); opacity: 0; }
+            15% { opacity: 0.7; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-85vh) translateX(30px) scale(1); opacity: 0; }
+        }
+
+        /* Animation 2 : Cœurs descendants/flottants depuis la photo (Deuxième page) */
+        .heart-invitation {
+            position: absolute;
+            top: 10vh; 
+            pointer-events: none;
+            animation: floatDown 8s ease-in-out forwards;
+            opacity: 0;
+            z-index: 40;
+        }
+
+        @keyframes floatDown {
+            0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(50vh) translateX(40px) scale(1.1); opacity: 0; }
         }
     </style>
 </head>
-<body class="bg-stone-100 text-[#020228] antialiased">
+<body class="bg-stone-50 text-stone-800 antialiased">
 
-    <!-- STREAMING_CHUNK: Initializing HTML core containers... -->
-    <div id="app" class="min-h-screen flex justify-center items-center p-0 sm:p-4 bg-gradient-to-br from-stone-100 to-stone-200">
-        <!-- Le conteneur s'adapte dynamiquement avec une transition de couleur -->
-        <div class="max-w-md w-full bg-[#020228] shadow-2xl sm:rounded-2xl overflow-hidden relative min-h-screen sm:min-h-[85vh] flex flex-col transition-colors duration-500" id="main-container">
+    <div id="app" class="min-h-screen flex justify-center items-center p-0 sm:p-4 bg-gradient-to-br from-stone-100 to-stone-200 relative overflow-hidden">
+        
+        <div class="max-w-md w-full bg-white shadow-2xl sm:rounded-2xl overflow-hidden relative min-h-screen sm:min-h-[85vh] flex flex-col border border-stone-200/50 z-10" id="main-container">
+            <!-- Contenu dynamique -->
         </div>
     </div>
 
     <script>
-        /* STREAMING_CHUNK: Declaring updated wedding dataset for Exodus DGC... */
         const weddingData = {
             groom: "Eric",
             bride: "Prescillia",
             date: "05 Septembre 2026",
-            time: "20h30",
-            location: "Salle de fête EXODUS",
-            address: "Commune : Ngaliema (Quartier DGC), Réf : hôpital de voici l'homme, non loin de l'arrêt DGC.",
-            mapUrl: "https://maps.google.com/?q=Salle+Exodus+DGC+Ngaliema+Kinshasa"
+            time: "20h00",
+            location: "Salle de fête EXODUS/DGC",
+            address: "Route de Matadi, Quartier DGC, Commune de Ngaliema.",
+            mapUrl: "https://maps.google.com/?q=Salle+Exodus+DGC+Ngaliema+Kinshasa",
+            program: [
+                { time: "20:30", event: "Soirée Dansante", desc: "Dîner de prestige, ouverture du bal et festivités" }
+            ]
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -61,227 +108,164 @@
             table: params.get('table') || 'Honneur'
         };
 
+        let currentView = 'envelope';
+        let heartInterval = null;
+
         function setView(viewName) {
+            currentView = viewName;
             render(viewName);
+            startHeartEffect();
         }
 
-        /* STREAMING_CHUNK: Designing core navigation and premium tab layouts... */
+        function startHeartEffect() {
+            if (heartInterval) clearInterval(heartInterval);
+            
+            heartInterval = setInterval(() => {
+                const container = document.getElementById('main-container');
+                if (!container) return;
+
+                const heart = document.createElement('div');
+                
+                // Cœurs rouges vifs
+                heart.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="rgba(220, 38, 38, 0.65)" stroke="none">
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                    </svg>
+                `;
+
+                heart.style.left = Math.random() * 85 + 7 + '%';
+                const duration = Math.random() * 3 + 5; 
+                heart.style.animationDuration = duration + 's';
+
+                if (currentView === 'envelope') {
+                    heart.classList.add('heart-envelope');
+                } else {
+                    heart.classList.add('heart-invitation');
+                    heart.style.top = Math.random() * 15 + 5 + 'vh'; 
+                }
+
+                container.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, duration * 1000);
+            }, 500);
+        }
+
         function render(view) {
             const container = document.getElementById('main-container');
             if (!container) return;
             
             if (view === 'envelope') {
-                // Première page (Enveloppe) : Fond bleu nuit profond assorti à image_bf6dd8.png
-                container.className = "max-w-md w-full bg-[#020228] shadow-2xl sm:rounded-2xl overflow-hidden relative min-h-screen sm:min-h-[85vh] flex flex-col border border-amber-500/15";
-                
                 container.innerHTML = `
-                    <div class="absolute inset-0 z-50 bg-[#020228] flex flex-col items-center justify-between p-8 cursor-pointer fade-in shadow-2xl relative overflow-hidden select-none" onclick="setView('invitation')">
-                        
-                        <!-- Splendide halo de lumière central arrière -->
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-emerald-500/10 blur-[100px] pointer-events-none"></div>
+                    <div class="absolute inset-0 z-50 ethnic-bordeaux-bg flex flex-col items-center justify-between p-8 cursor-pointer fade-in shadow-inner relative" onclick="setView('invitation')">
+                        <div class="absolute inset-0 bg-black/10 pointer-events-none z-0"></div>
 
-                        <!-- Cadre intérieur élégant en liseré or -->
-                        <div class="absolute inset-4 border border-amber-500/20 pointer-events-none rounded-xl"></div>
-                        <div class="absolute inset-[19px] border-2 border-double border-amber-500/10 pointer-events-none rounded-lg"></div>
-                        
-                        <!-- Ornements botaniques d'angle or en SVG -->
-                        <div class="absolute top-6 left-6 text-amber-500/20 pointer-events-none w-16 h-16">
-                            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M10,90 Q10,10 90,10 M10,10 L30,30 M10,10 Q25,5 35,15 M10,10 Q5,25 15,35 M20,20 Q40,15 45,30 M20,20 Q15,40 30,45" />
-                            </svg>
-                        </div>
-                        <div class="absolute top-6 right-6 text-amber-500/20 pointer-events-none w-16 h-16 rotate-90">
-                            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M10,90 Q10,10 90,10 M10,10 L30,30 M10,10 Q25,5 35,15 M10,10 Q5,25 15,35 M20,20 Q40,15 45,30 M20,20 Q15,40 30,45" />
-                            </svg>
-                        </div>
-                        <div class="absolute bottom-6 left-6 text-amber-500/20 pointer-events-none w-16 h-16 -rotate-90">
-                            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M10,90 Q10,10 90,10 M10,10 L30,30 M10,10 Q25,5 35,15 M10,10 Q5,25 15,35 M20,20 Q40,15 45,30 M20,20 Q15,40 30,45" />
-                            </svg>
-                        </div>
-                        <div class="absolute bottom-6 right-6 text-amber-500/20 pointer-events-none w-16 h-16 rotate-180">
-                            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M10,90 Q10,10 90,10 M10,10 L30,30 M10,10 Q25,5 35,15 M10,10 Q5,25 15,35 M20,20 Q40,15 45,30 M20,20 Q15,40 30,45" />
-                            </svg>
-                        </div>
-
-                        <!-- Cordon doré décoratif haut -->
-                        <div class="w-full flex justify-center pt-8 z-10">
-                            <div class="h-[2px] w-12 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent"></div>
+                        <div class="w-full flex justify-center pt-4 z-10">
+                            <div class="h-px w-16 bg-white/30"></div>
                         </div>
                         
-                        <!-- Cœur textuel de l'invitation d'honneur -->
-                        <div class="text-center space-y-6 my-auto max-w-[320px] z-10 px-2">
-                            <p class="text-amber-400 uppercase tracking-[0.35em] text-[10px] font-semibold drop-shadow-sm">INVITATION </p>
-                            
-                            <!-- Noms des Mariés en Or chaud -->
-                            <h3 class="text-2xl text-amber-300 uppercase tracking-[0.15em] font-light serif leading-snug drop-shadow-sm">
-                                ${weddingData.groom} 
-                                <span class="serif italic text-amber-400/90 lowercase text-3xl block my-1">&</span> 
-                                ${weddingData.bride}
+                        <div class="text-center space-y-4 my-auto max-w-[320px] z-10">
+                            <p class="text-amber-200/80 uppercase tracking-[0.25em] text-[10px] font-medium">INVITATION</p>
+                            <h3 class="text-xl text-white uppercase tracking-widest font-light serif">
+                                ${weddingData.groom} <span class="italic text-amber-300 lowercase text-lg">&</span> ${weddingData.bride}
                             </h3>
                             
-                            <div class="w-12 h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent mx-auto"></div>
-                            
-                            <p class="text-emerald-100/70 text-xs italic font-light leading-relaxed px-4">
+                            <p class="text-stone-100 text-xs italic font-light pt-4 leading-relaxed px-2 opacity-90">
                                 "Nous sommes heureux de vous annoncer notre mariage et ce serait vraiment un bonheur pour nous de vous compter parmi nos invités ce jour-là"
                             </p>
                             
-                            <!-- Invité en Blanc Pur -->
-                            <div class="py-4 space-y-1">
-                                <p class="text-amber-500/60 italic text-[12px]">Invitation personnelle pour</p>
-                                <h2 class="text-3xl font-light text-white serif tracking-wide drop-shadow-md">${guestInfo.name}</h2>
+                            <div class="py-4">
+                                <p class="text-amber-200/60 italic text-[11px] mb-1">Invitation personnelle pour</p>
+                                <h2 class="text-3xl font-light text-amber-300 serif tracking-wide">${guestInfo.name}</h2>
                             </div>
                         </div>
                         
-                        <!-- Sceau royal de cire d'or tactile -->
-                        <div class="flex flex-col items-center space-y-4 pb-8 z-10">
-                            <div class="relative flex items-center justify-center">
-                                <!-- Ondes lumineuses de vibration -->
-                                <span class="absolute inline-flex h-20 w-20 rounded-full bg-amber-500/10 animate-ping"></span>
-                                
-                                <!-- Sceau de cire métallique 3D Premium -->
-                                <div class="w-16 h-16 bg-gradient-to-br from-amber-200 via-amber-500 to-amber-700 rounded-full flex items-center justify-center shadow-[0_10px_25px_-5px_rgba(217,119,6,0.5),_inset_0_2px_4px_rgba(255,255,255,0.6)] border-2 border-amber-300/40 transition-transform duration-300 hover:scale-110 active:scale-95">
-                                    <div class="w-12 h-12 rounded-full border border-dashed border-amber-200/50 flex items-center justify-center">
-                                        <span class="text-stone-900 font-bold tracking-tight text-base serif drop-shadow">${weddingData.groom[0]}&${weddingData.bride[0]}</span>
-                                    </div>
-                                </div>
+                        <div class="flex flex-col items-center space-y-4 pb-8 transition-transform duration-300 hover:scale-105 z-10">
+                            <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-xl border-2 border-amber-300/40 ring-4 ring-white/10">
+                                <span class="text-stone-900 font-semibold tracking-tighter text-sm serif">${weddingData.groom[0]}&${weddingData.bride[0]}</span>
                             </div>
-                            
-                            <div class="flex items-center gap-2 text-amber-400/70 text-[9px] uppercase tracking-[0.3em] font-semibold">
-                                <span>Toucher pour Ouvrir</span>
-                                <i data-lucide="chevron-down" class="w-3.5 h-3.5 animate-bounce text-amber-400"></i>
+                            <div class="flex items-center gap-2 text-stone-200 text-[10px] uppercase tracking-[0.3em] font-medium animate-pulse">
+                                <span>Ouvrir l'invitation</span>
+                                <i data-lucide="chevron-down" class="w-3 h-3 text-amber-300"></i>
                             </div>
                         </div>
                     </div>
                 `;
             } 
             else if (view === 'invitation') {
-                // Deuxième page (Invitation) : Fond blanc d'art (ivoire) doux, sans barre d'onglets au bas
-                container.className = "max-w-md w-full bg-[#FAF9F5] shadow-2xl sm:rounded-2xl overflow-hidden relative min-h-screen sm:min-h-[85vh] flex flex-col border border-stone-200/40";
-                
                 container.innerHTML = `
-                    <div class="flex-1 overflow-y-auto no-scrollbar scroll-smooth bg-[#FAF9F5] pb-12">
-                        <!-- En-tête photo de mariage -->
-                        <div class="relative h-[38vh] flex items-end justify-center pb-8 overflow-hidden shadow-sm">
-                            <!-- Dégradé doux ivoire sur la photo -->
-                            <div class="absolute inset-0 bg-gradient-to-b from-stone-950/20 via-transparent to-[#FAF9F5] z-10"></div>
+                    <div class="flex-1 overflow-y-auto no-scrollbar scroll-smooth bg-stone-50/40 pb-12 relative">
+                        <!-- En-tête avec Photo et Noms (Badge de date supprimé d'ici) -->
+                        <div class="relative h-[45vh] flex items-end justify-center pb-12 overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-b from-stone-900/20 via-transparent to-stone-50 z-10"></div>
                             <div class="absolute inset-0 bg-[url('ma-photo.jpg')] bg-cover bg-center scale-105 animate-subtle-zoom"></div>
-                            
-                            <div class="relative z-20 text-center px-4 space-y-2.5">
-                                <h1 class="text-4xl font-light text-stone-900 tracking-wide">${weddingData.groom} <span class="text-2xl font-serif italic text-[#020228]">&</span> ${weddingData.bride}</h1>
-                                <div class="inline-block bg-white/95 px-5 py-1 rounded-full border border-amber-600/15 shadow-sm">
-                                    <p class="uppercase tracking-[0.3em] text-[#020228] text-[9px] font-semibold">${weddingData.date}</p>
-                                </div>
+                            <div class="relative z-20 text-center px-4 space-y-2">
+                                <h1 class="text-4xl font-light text-stone-900 tracking-wide">${weddingData.groom} <span class="text-2xl font-serif italic text-amber-800">&</span> ${weddingData.bride}</h1>
                             </div>
                         </div>
 
-                        <!-- Contenu principal : Une seule page continue -->
-                        <div class="p-6 text-center space-y-6 relative">
+                        <!-- Corps de l'invitation -->
+                        <div class="p-8 text-center space-y-6 relative z-30">
                             
-                            <!-- Carton de mariage blanc d'art avec bordures bleu foncé royal -->
-                            <article class="bg-white p-6 rounded-2xl border-2 border-double border-[#020228]/25 shadow-md relative overflow-hidden blue-shadow-soft space-y-6 text-center">
+                            <!-- Section Table Invité -->
+                            <section class="bg-white p-5 rounded-2xl border border-stone-200/60 shadow-sm space-y-2 relative z-30">
+                                <p class="text-[9px] uppercase tracking-widest text-red-800 font-medium">Place réservée pour</p>
+                                <h3 class="text-xl font-medium text-blue-950 serif">${guestInfo.name}</h3>
+                                <div class="w-6 h-px bg-amber-700/20 mx-auto my-1"></div>
+                                <div class="inline-flex items-center gap-2 text-amber-800 bg-amber-500/5 px-3 py-1 rounded-full border border-amber-500/10">
+                                    <i data-lucide="armchair" class="w-3.5 h-3.5"></i>
+                                    <p class="text-[9px] font-semibold uppercase tracking-widest">Table : ${guestInfo.table}</p>
+                                </div>
+                            </section>
+                            
+                            <!-- Section Programme avec fond BLEU NUIT de prestige texturé (Date conservée ici) -->
+                            <section class="ethnic-midnight-blue-bg p-6 rounded-2xl shadow-xl space-y-6 border border-blue-950 relative overflow-hidden z-30">
+                                <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+
+                                <div class="flex flex-col items-center justify-center space-y-2 relative z-10">
+                                    <div class="flex items-center justify-center gap-3 w-full">
+                                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-blue-900"></div>
+                                        <div class="flex items-center gap-2 text-white">
+                                            <i data-lucide="sparkles" class="text-amber-300 w-3.5 h-3.5 animate-pulse"></i>
+                                            <h3 class="text-[9px] uppercase tracking-[0.25em] font-bold text-stone-200">Réception & Festivités</h3>
+                                        </div>
+                                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-blue-900"></div>
+                                    </div>
+                                    <p class="text-[#dfb743] text-2xl font-light serif tracking-widest">${weddingData.date}</p>
+                                </div>
+
+                                <div class="bg-black/40 p-5 rounded-xl border border-white/5 text-center space-y-2 max-w-[300px] mx-auto backdrop-blur-sm relative z-10">
+                                    <span class="text-xs font-bold text-amber-300 bg-amber-400/20 px-2.5 py-0.5 rounded-md tracking-wider">${weddingData.time}</span>
+                                    <h4 class="text-base font-medium text-white pt-1">${weddingData.program[0].event}</h4>
+                                    <p class="text-xs text-stone-200 font-light leading-relaxed">${weddingData.program[0].desc}</p>
+                                </div>
+                            </section>
+
+                            <!-- Section Itinéraire & Bouton Maps -->
+                            <section class="bg-stone-100/60 p-5 rounded-2xl border border-stone-200/40 space-y-4 relative z-30">
+                                <div class="w-8 h-8 bg-amber-800/10 rounded-full flex items-center justify-center mx-auto text-amber-800">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-[10px] uppercase tracking-widest font-bold text-red-800">Lieu de réception</p>
+                                    <p class="text-base font-bold serif text-stone-900 tracking-wide leading-tight">${weddingData.location}</p>
+                                    <p class="text-stone-600 font-light text-xs leading-relaxed px-2">${weddingData.address}</p>
+                                </div>
                                 
-                                <!-- Ornements d'angle bleu foncé fins -->
-                                <div class="absolute top-2.5 left-2.5 text-[#020228]/20 pointer-events-none w-6 h-6">
-                                    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5,45 V5 H45"/></svg>
+                                <div class="pt-2 text-center">
+                                    <a href="${weddingData.mapUrl}" target="_blank" rel="noopener noreferrer" 
+                                       class="inline-flex items-center gap-2 bg-stone-900 text-stone-100 px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider font-medium shadow-sm hover:bg-stone-800 transition-colors">
+                                        <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-400"></i>
+                                        Ouvrir Google Maps
+                                    </a>
                                 </div>
-                                <div class="absolute top-2.5 right-2.5 text-[#020228]/20 pointer-events-none w-6 h-6 rotate-90">
-                                    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5,45 V5 H45"/></svg>
-                                </div>
-                                <div class="absolute bottom-2.5 left-2.5 text-[#020228]/20 pointer-events-none w-6 h-6 -rotate-90">
-                                    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5,45 V5 H45"/></svg>
-                                </div>
-                                <div class="absolute bottom-2.5 right-2.5 text-[#020228]/20 pointer-events-none w-6 h-6 rotate-180">
-                                    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5,45 V5 H45"/></svg>
-                                </div>
+                            </section>
 
-                                <!-- Invitation nominative d'honneur -->
-                                <div class="space-y-1">
-                                    <p class="text-[9px] uppercase tracking-[0.3em] text-[#020228]/60 font-semibold">Invitation Personnelle</p>
-                                    <h3 class="text-2xl font-light text-[#020228] serif tracking-wide pt-1">${guestInfo.name}</h3>
-                                    
-                                    <div class="pt-2">
-                                        <span class="inline-flex items-center gap-1.5 bg-[#020228]/5 px-3.5 py-1 rounded-full border border-[#020228]/15 text-[#020228] text-[9px] font-semibold tracking-[0.15em] uppercase">
-                                            <i data-lucide="armchair" class="w-3 h-3"></i>
-                                            Table : ${guestInfo.table}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <!-- Séparateur botanique fin en bleu foncé -->
-                                <div class="flex justify-center items-center gap-3">
-                                    <div class="h-px w-10 bg-[#020228]/15"></div>
-                                    <svg class="w-3.5 h-3.5 text-[#020228]/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M12 3v18M12 3a9 9 0 0 1 9 9M12 21a9 9 0 0 0-9-9" />
-                                    </svg>
-                                    <div class="h-px w-10 bg-[#020228]/15"></div>
-                                </div>
-
-                                <!-- Programme & Date de l'événement -->
-                                <div class="space-y-4">
-                                    <div class="space-y-1">
-                                        <p class="text-[9px] uppercase tracking-[0.25em] text-stone-400 font-medium">Célébration le</p>
-                                        <p class="text-[#020228] text-2xl font-light serif tracking-widest uppercase">${weddingData.date}</p>
-                                    </div>
-
-                                    <!-- Carton "Soirée Dansante" au fini haute couture -->
-                                    <div class="relative bg-gradient-to-br from-white to-[#FAF9F5] p-6 rounded-2xl border border-amber-500/15 max-w-[280px] mx-auto space-y-3.5 shadow-[0_8px_25px_-5px_rgba(2,2,40,0.04)] hover:shadow-[0_12px_30px_-5px_rgba(2,2,40,0.08)] transition-all duration-300">
-                                        <!-- Petits ornements d'en-tête or -->
-                                        <div class="flex items-center justify-center gap-2">
-                                            <span class="h-px w-6 bg-gradient-to-r from-transparent to-amber-500/20"></span>
-                                            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600/60 animate-pulse"></i>
-                                            <span class="h-px w-6 bg-gradient-to-l from-transparent to-amber-500/20"></span>
-                                        </div>
-
-                                        <div class="space-y-2">
-                                            <!-- Badge Heure Premium -->
-                                            <span class="text-[10px] font-bold text-white bg-[#020228] px-4 py-1 rounded-full tracking-[0.25em] uppercase inline-block border border-amber-500/20 shadow-sm">${weddingData.time}</span>
-                                            <h4 class="text-lg font-semibold text-[#020228] serif tracking-wide pt-1.5">Soirée Dansante</h4>
-                                        </div>
-                                        
-                                        <p class="text-xs text-stone-500 font-light leading-relaxed px-1">Dîner de prestige, ouverture du bal et festivités</p>
-                                        
-                                        <!-- Ligne décorative basse -->
-                                        <div class="w-10 h-[2px] bg-gradient-to-r from-transparent via-amber-500/30 to-transparent mx-auto"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Séparateur botanique fin -->
-                                <div class="flex justify-center items-center gap-3">
-                                    <div class="h-px w-10 bg-[#020228]/15"></div>
-                                    <svg class="w-3.5 h-3.5 text-[#020228]/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M12 3v18M12 3a9 9 0 0 1 9 9M12 21a9 9 0 0 0-9-9" />
-                                    </svg>
-                                    <div class="h-px w-10 bg-[#020228]/15"></div>
-                                </div>
-
-                                <!-- Lieu de réception élégant avec intégration du bouton Google Maps -->
-                                <div class="space-y-4 px-2">
-                                    <div class="space-y-1.5">
-                                        <div class="flex items-center justify-center gap-1.5 text-[#020228]">
-                                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-                                            <p class="text-xs font-semibold uppercase tracking-widest serif">${weddingData.location}</p>
-                                        </div>
-                                        <p class="text-[11px] text-stone-500 font-light leading-relaxed max-w-[260px] mx-auto">${weddingData.address}</p>
-                                    </div>
-                                    
-                                    <!-- Le bouton Google Maps intégré ici de manière magistrale -->
-                                    <div class="pt-2">
-                                        <a href="${weddingData.mapUrl}" target="_blank" rel="noopener noreferrer" 
-                                           class="inline-flex items-center gap-2 bg-[#020228] text-white px-6 py-3 rounded-xl text-[10px] uppercase tracking-[0.2em] font-medium shadow-md hover:opacity-95 transition-all hover:scale-105 active:scale-95">
-                                            <i data-lucide="navigation" class="w-4 h-4 text-white animate-pulse"></i>
-                                            Ouvrir Google Maps
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </article>
-
-                            <footer class="pt-10 pb-4 text-stone-400 text-[9px] uppercase tracking-[0.35em] border-t border-stone-200/40 mt-12">
-                                <p class="mb-4 text-stone-500 font-serif italic normal-case tracking-normal text-base">Nous serions particulièrement honorés de vous compter parmi nous.</p>
-                                <div class="font-semibold text-[#020228] tracking-[0.2em] mt-6">${weddingData.groom} & ${weddingData.bride}</div>
+                            <!-- Pied de page -->
+                            <footer class="pt-8 pb-4 text-stone-400 text-[9px] uppercase tracking-[0.35em] border-t border-stone-200/60 mt-12 relative z-30">
+                                <p class="mb-4 text-stone-500 font-serif italic normal-case tracking-normal text-sm">Nous serions honorés de vous compter parmi nous.</p>
+                                <div class="font-medium text-stone-600 mt-6">${weddingData.groom} & ${weddingData.bride}</div>
                             </footer>
                         </div>
                     </div>
@@ -290,7 +274,7 @@
             lucide.createIcons();
         }
 
-        window.onload = () => render('envelope');
+        window.onload = () => setView('envelope');
     </script>
 </body>
 </html>
