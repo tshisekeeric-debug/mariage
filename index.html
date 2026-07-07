@@ -27,16 +27,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 1. Texture originale rouge bordeaux (Pour la Première Page) */
-        .ethnic-bordeaux-bg {
-            background-color: #991b1b; 
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='%237f1d1d' stroke-width='2'/%3E%3Cpath d='M30 10 L50 30 L30 50 L10 30 Z' fill='none' stroke='%237f1d1d' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='3' fill='%237f1d1d'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-        }
-
-        /* 2. Même texture mais version Fond Bleu Nuit Royal Lumineux (Pour la Deuxième Page) */
+        /* Le Fond Bleu Nuit Royal Lumineux et Texturé */
         .ethnic-midnight-blue-bg {
-            background-color: #03071e; /* Base bleu nuit très sombre */
+            background-color: #03071e; 
             background-image: 
                 radial-gradient(circle at top left, rgba(30, 58, 138, 0.6), transparent 70%),
                 radial-gradient(circle at bottom right, rgba(29, 78, 216, 0.4), transparent 80%),
@@ -44,24 +37,7 @@
             background-repeat: repeat;
         }
 
-        /* Animation 1 : Cœurs montants pour la première page (Enveloppe) */
-        .heart-envelope {
-            position: absolute;
-            bottom: -20px;
-            pointer-events: none;
-            animation: floatUp 7s linear forwards;
-            opacity: 0;
-            z-index: 40;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) translateX(0) scale(0.6); opacity: 0; }
-            15% { opacity: 0.7; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-85vh) translateX(30px) scale(1); opacity: 0; }
-        }
-
-        /* Animation 2 : Cœurs descendants/flottants depuis la photo (Deuxième page) */
+        /* Animation : Cœurs flottants uniquement pour la deuxième page */
         .heart-invitation {
             position: absolute;
             top: 10vh; 
@@ -84,8 +60,7 @@
     <div id="app" class="min-h-screen flex justify-center items-center p-0 sm:p-4 bg-gradient-to-br from-stone-100 to-stone-200 relative overflow-hidden">
         
         <div class="max-w-md w-full bg-white shadow-2xl sm:rounded-2xl overflow-hidden relative min-h-screen sm:min-h-[85vh] flex flex-col border border-stone-200/50 z-10" id="main-container">
-            <!-- Contenu dynamique -->
-        </div>
+            </div>
     </div>
 
     <script>
@@ -120,13 +95,15 @@
         function startHeartEffect() {
             if (heartInterval) clearInterval(heartInterval);
             
+            // On ne lance l'effet que si on est sur la vue "invitation"
+            if (currentView !== 'invitation') return;
+            
             heartInterval = setInterval(() => {
                 const container = document.getElementById('main-container');
                 if (!container) return;
 
                 const heart = document.createElement('div');
                 
-                // Cœurs rouges vifs
                 heart.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="rgba(220, 38, 38, 0.65)" stroke="none">
                         <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
@@ -137,12 +114,8 @@
                 const duration = Math.random() * 3 + 5; 
                 heart.style.animationDuration = duration + 's';
 
-                if (currentView === 'envelope') {
-                    heart.classList.add('heart-envelope');
-                } else {
-                    heart.classList.add('heart-invitation');
-                    heart.style.top = Math.random() * 15 + 5 + 'vh'; 
-                }
+                heart.classList.add('heart-invitation');
+                heart.style.top = Math.random() * 15 + 5 + 'vh'; 
 
                 container.appendChild(heart);
 
@@ -158,11 +131,11 @@
             
             if (view === 'envelope') {
                 container.innerHTML = `
-                    <div class="absolute inset-0 z-50 ethnic-bordeaux-bg flex flex-col items-center justify-between p-8 cursor-pointer fade-in shadow-inner relative" onclick="setView('invitation')">
+                    <div class="absolute inset-0 z-50 ethnic-midnight-blue-bg flex flex-col items-center justify-between p-8 cursor-pointer fade-in shadow-inner" onclick="setView('invitation')">
                         <div class="absolute inset-0 bg-black/10 pointer-events-none z-0"></div>
 
                         <div class="w-full flex justify-center pt-4 z-10">
-                            <div class="h-px w-16 bg-white/30"></div>
+                            <div class="h-px w-16 bg-white/20"></div>
                         </div>
                         
                         <div class="text-center space-y-4 my-auto max-w-[320px] z-10">
@@ -171,7 +144,7 @@
                                 ${weddingData.groom} <span class="italic text-amber-300 lowercase text-lg">&</span> ${weddingData.bride}
                             </h3>
                             
-                            <p class="text-stone-100 text-xs italic font-light pt-4 leading-relaxed px-2 opacity-90">
+                            <p class="text-stone-200 text-xs italic font-light pt-4 leading-relaxed px-2 opacity-90">
                                 "Nous sommes heureux de vous annoncer notre mariage et ce serait vraiment un bonheur pour nous de vous compter parmi nos invités ce jour-là"
                             </p>
                             
@@ -196,7 +169,6 @@
             else if (view === 'invitation') {
                 container.innerHTML = `
                     <div class="flex-1 overflow-y-auto no-scrollbar scroll-smooth bg-stone-50/40 pb-12 relative">
-                        <!-- En-tête avec Photo et Noms (Badge de date supprimé d'ici) -->
                         <div class="relative h-[45vh] flex items-end justify-center pb-12 overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-b from-stone-900/20 via-transparent to-stone-50 z-10"></div>
                             <div class="absolute inset-0 bg-[url('ma-photo.jpg')] bg-cover bg-center scale-105 animate-subtle-zoom"></div>
@@ -205,51 +177,45 @@
                             </div>
                         </div>
 
-                        <!-- Corps de l'invitation -->
                         <div class="p-8 text-center space-y-6 relative z-30">
                             
-                            <!-- Section Table Invité -->
                             <section class="bg-white p-5 rounded-2xl border border-stone-200/60 shadow-sm space-y-2 relative z-30">
                                 <p class="text-[9px] uppercase tracking-widest text-red-800 font-medium">Place réservée pour</p>
-                                <h3 class="text-xl font-medium text-blue-950 serif">${guestInfo.name}</h3>
+                                <h3 class="text-xl font-medium text-emerald-800 serif">${guestInfo.name}</h3>
                                 <div class="w-6 h-px bg-amber-700/20 mx-auto my-1"></div>
-                                <div class="inline-flex items-center gap-2 text-amber-800 bg-amber-500/5 px-3 py-1 rounded-full border border-amber-500/10">
-                                    <i data-lucide="armchair" class="w-3.5 h-3.5"></i>
+                                <div class="inline-flex items-center gap-2 text-blue-950 bg-stone-50 px-3 py-1 rounded-full border border-blue-950">
+                                    <i data-lucide="armchair" class="w-3.5 h-3.5 text-amber-800"></i>
                                     <p class="text-[9px] font-semibold uppercase tracking-widest">Table : ${guestInfo.table}</p>
                                 </div>
                             </section>
                             
-                            <!-- Section Programme avec fond BLEU NUIT de prestige texturé (Date conservée ici) -->
-                            <section class="ethnic-midnight-blue-bg p-6 rounded-2xl shadow-xl space-y-6 border border-blue-950 relative overflow-hidden z-30">
-                                <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
-
+                            <section class="bg-white p-6 rounded-2xl shadow-sm space-y-6 border border-stone-200/60 relative overflow-hidden z-30">
                                 <div class="flex flex-col items-center justify-center space-y-2 relative z-10">
                                     <div class="flex items-center justify-center gap-3 w-full">
-                                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-blue-900"></div>
-                                        <div class="flex items-center gap-2 text-white">
-                                            <i data-lucide="sparkles" class="text-amber-300 w-3.5 h-3.5 animate-pulse"></i>
-                                            <h3 class="text-[9px] uppercase tracking-[0.25em] font-bold text-stone-200">Réception & Festivités</h3>
+                                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-stone-200"></div>
+                                        <div class="flex items-center gap-2 text-stone-800">
+                                            <i data-lucide="sparkles" class="text-amber-600 w-3.5 h-3.5"></i>
+                                            <h3 class="text-[9px] uppercase tracking-[0.25em] font-bold text-red-800">Réception & Festivités</h3>
                                         </div>
-                                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-blue-900"></div>
+                                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-stone-200"></div>
                                     </div>
-                                    <p class="text-[#dfb743] text-2xl font-light serif tracking-widest">${weddingData.date}</p>
+                                    <p class="text-amber-800 text-2xl font-light serif tracking-widest">${weddingData.date}</p>
                                 </div>
 
-                                <div class="bg-black/40 p-5 rounded-xl border border-white/5 text-center space-y-2 max-w-[300px] mx-auto backdrop-blur-sm relative z-10">
-                                    <span class="text-xs font-bold text-amber-300 bg-amber-400/20 px-2.5 py-0.5 rounded-md tracking-wider">${weddingData.time}</span>
-                                    <h4 class="text-base font-medium text-white pt-1">${weddingData.program[0].event}</h4>
-                                    <p class="text-xs text-stone-200 font-light leading-relaxed">${weddingData.program[0].desc}</p>
+                                <div class="bg-stone-50 p-5 rounded-xl border border-stone-200/60 text-center space-y-2 max-w-[300px] mx-auto relative z-10">
+                                    <span class="text-xs font-bold text-blue-950 bg-white px-2.5 py-0.5 rounded-md tracking-wider border border-blue-950">${weddingData.time}</span>
+                                    <h4 class="text-base font-medium text-blue-950 pt-1">${weddingData.program[0].event}</h4>
+                                    <p class="text-xs text-stone-600 font-light leading-relaxed">${weddingData.program[0].desc}</p>
                                 </div>
                             </section>
 
-                            <!-- Section Itinéraire & Bouton Maps -->
                             <section class="bg-stone-100/60 p-5 rounded-2xl border border-stone-200/40 space-y-4 relative z-30">
                                 <div class="w-8 h-8 bg-amber-800/10 rounded-full flex items-center justify-center mx-auto text-amber-800">
                                     <i data-lucide="map-pin" class="w-4 h-4"></i>
                                 </div>
                                 <div class="space-y-2">
                                     <p class="text-[10px] uppercase tracking-widest font-bold text-red-800">Lieu de réception</p>
-                                    <p class="text-base font-bold serif text-stone-900 tracking-wide leading-tight">${weddingData.location}</p>
+                                    <p class="text-base font-bold serif text-blue-950 tracking-wide leading-tight">${weddingData.location}</p>
                                     <p class="text-stone-600 font-light text-xs leading-relaxed px-2">${weddingData.address}</p>
                                 </div>
                                 
@@ -262,7 +228,6 @@
                                 </div>
                             </section>
 
-                            <!-- Pied de page -->
                             <footer class="pt-8 pb-4 text-stone-400 text-[9px] uppercase tracking-[0.35em] border-t border-stone-200/60 mt-12 relative z-30">
                                 <p class="mb-4 text-stone-500 font-serif italic normal-case tracking-normal text-sm">Nous serions honorés de vous compter parmi nous.</p>
                                 <div class="font-medium text-stone-600 mt-6">${weddingData.groom} & ${weddingData.bride}</div>
