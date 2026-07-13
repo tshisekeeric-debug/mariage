@@ -137,30 +137,31 @@
                             <div class="h-px w-16 bg-white/20"></div>
                         </div>
                         
-                        <div class="text-center space-y-4 my-auto max-w-[320px] z-10">
+                        <!-- Conteneur global centré avec le bouton au milieu -->
+                        <div class="text-center space-y-6 my-auto w-full max-w-[320px] z-10 flex flex-col items-center">
                             <p class="text-amber-200/80 uppercase tracking-[0.25em] text-[10px] font-medium">INVITATION</p>
                             <h3 class="text-xl text-white uppercase tracking-widest font-light serif">
                                 ${weddingData.groom} <span class="italic text-amber-300 lowercase text-lg">&</span> ${weddingData.bride}
                             </h3>
                             
-                            <p class="text-stone-200 text-xs italic font-light pt-4 leading-relaxed px-2 opacity-90">
+                            <p class="text-stone-200 text-xs italic font-light pt-2 leading-relaxed px-2 opacity-90">
                                 "Nous sommes heureux de vous annoncer notre mariage et ce serait vraiment un bonheur pour nous de vous compter parmi nos invités ce jour-là"
                             </p>
                             
-                            <div class="py-4">
+                            <div class="py-2">
                                 <p class="text-amber-200/60 italic text-[11px] mb-1">Invitation personnelle pour</p>
                                 <h2 class="text-3xl font-light text-amber-300 serif tracking-wide">${guestInfo.name}</h2>
                             </div>
+
+                            <!-- BOUTON AJUSTÉ ET CENTRÉ ICI -->
+                            <div class="w-full max-w-[240px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-600 hover:to-amber-600 text-stone-950 text-xs font-bold uppercase tracking-[0.2em] py-3.5 px-6 rounded-full shadow-[0_4px_20px_rgba(245,158,11,0.4)] border border-amber-300/60 flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 active:scale-95 animate-pulse mt-4">
+                                <span>Ouvrir l'invitation</span>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-stone-950 animate-bounce"></i>
+                            </div>
                         </div>
                         
-                        <div class="flex flex-col items-center space-y-4 pb-8 transition-transform duration-300 hover:scale-105 z-10">
-                            <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-xl border-2 border-amber-300/40 ring-4 ring-white/10">
-                                <span class="text-stone-900 font-semibold tracking-tighter text-sm serif">${weddingData.groom[0]}&${weddingData.bride[0]}</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-stone-200 text-[10px] uppercase tracking-[0.3em] font-medium animate-pulse">
-                                <span>Ouvrir l'invitation</span>
-                                <i data-lucide="chevron-down" class="w-3 h-3 text-amber-300"></i>
-                            </div>
+                        <div class="w-full flex justify-center pb-4 z-10">
+                            <div class="h-px w-16 bg-white/10"></div>
                         </div>
                     </div>
                 `;
