@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitation de Mariage - Eric & Prescillia</title>
+    <title>Invitation de Mariage - Israël & trisla</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@200;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -65,15 +65,24 @@
 
     <script>
         const weddingData = {
-            groom: "Eric",
-            bride: "Prescillia",
-            date: "05 Septembre 2026",
-            time: "20h00",
-            location: "Salle de fête EXODUS/DGC",
-            address: "Route de Matadi, Quartier DGC, Commune de Ngaliema.",
+            groom: "Israël",
+            bride: "trisla",
             mapUrl: "https://maps.google.com/?q=Salle+Exodus+DGC+Ngaliema+Kinshasa",
             program: [
-                { time: "20:30", event: "Soirée Dansante", desc: "festivités" }
+                { 
+                    date: "26 Décembre 2026",
+                    time: "", 
+                    event: "Bénédiction Nuptiale", 
+                    desc: "Église de Jésus-Christ de l'Esprit de Vérité / BIMA",
+                    address: "Sise avenue universitaire numéro 9"
+                },
+                { 
+                    date: "03 Janvier 2027",
+                    time: "18h30", 
+                    event: "Soirée Dansante", 
+                    desc: "Salle Food market",
+                    address: "103, Avenue Nguma, Q/jolie parc, C/NGALIEMA? Ref/paroisse saint luc, et rawbank"
+                }
             ]
         };
 
@@ -137,7 +146,6 @@
                             <div class="h-px w-16 bg-white/20"></div>
                         </div>
                         
-                        <!-- Conteneur global centré avec le bouton au milieu -->
                         <div class="text-center space-y-6 my-auto w-full max-w-[320px] z-10 flex flex-col items-center">
                             <p class="text-amber-200/80 uppercase tracking-[0.25em] text-[10px] font-medium">INVITATION</p>
                             <h3 class="text-xl text-white uppercase tracking-widest font-light serif">
@@ -145,8 +153,7 @@
                             </h3>
                             
                             <p class="text-stone-200 text-xs italic font-light pt-2 leading-relaxed px-2 opacity-90">
-                                "Ont l'honneur de vous convier à la célébration de leur union. Nous serions profondément heureux de partager avec vous ce moment unique.
-"
+                                "Nous sommes heureux de vous annoncer notre mariage et ce serait vraiment un bonheur pour nous de vous compter parmi nos invités ce jour-là"
                             </p>
                             
                             <div class="py-2">
@@ -154,7 +161,6 @@
                                 <h2 class="text-3xl font-light text-amber-300 serif tracking-wide">${guestInfo.name}</h2>
                             </div>
 
-                            <!-- BOUTON AJUSTÉ ET CENTRÉ ICI -->
                             <div class="w-full max-w-[240px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-600 hover:to-amber-600 text-stone-950 text-xs font-bold uppercase tracking-[0.2em] py-3.5 px-6 rounded-full shadow-[0_4px_20px_rgba(245,158,11,0.4)] border border-amber-300/60 flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 active:scale-95 animate-pulse mt-4">
                                 <span>Ouvrir l'invitation</span>
                                 <i data-lucide="chevron-down" class="w-4 h-4 text-stone-950 animate-bounce"></i>
@@ -197,40 +203,42 @@
                                         <div class="h-px flex-1 bg-gradient-to-r from-transparent to-stone-200"></div>
                                         <div class="flex items-center gap-2 text-stone-800">
                                             <i data-lucide="sparkles" class="text-amber-600 w-3.5 h-3.5"></i>
-                                            <h3 class="text-[9px] uppercase tracking-[0.25em] font-bold text-red-800">Réception & Festivités</h3>
+                                            <h3 class="text-[9px] uppercase tracking-[0.25em] font-bold text-red-800">Programme des Célébrations</h3>
                                         </div>
                                         <div class="h-px flex-1 bg-gradient-to-l from-transparent to-stone-200"></div>
                                     </div>
-                                    <p class="text-amber-800 text-2xl font-light serif tracking-widest">${weddingData.date}</p>
                                 </div>
 
-                                <div class="bg-white p-5 rounded-xl border border-blue-950 text-center space-y-2 max-w-[300px] mx-auto relative z-10">
-                                    <span class="text-xs font-bold text-blue-950 bg-stone-50 px-2.5 py-0.5 rounded-md tracking-wider border border-blue-950/20">${weddingData.time}</span>
+                                <!-- 1. Événement : Bénédiction Nuptiale -->
+                                <div class="bg-white p-5 rounded-xl border border-blue-950 text-center space-y-2 max-w-[300px] mx-auto relative z-10 shadow-sm">
+                                    <span class="text-xs font-bold text-blue-950 bg-stone-50 px-2.5 py-0.5 rounded-md tracking-wider border border-blue-950/20 inline-block">${weddingData.program[0].date}</span>
                                     <h4 class="text-base font-medium text-blue-950 pt-1">${weddingData.program[0].event}</h4>
-                                    <p class="text-xs text-stone-600 font-light leading-relaxed">${weddingData.program[0].desc}</p>
+                                    <p class="text-xs text-stone-700 font-medium leading-relaxed">${weddingData.program[0].desc}</p>
+                                    <p class="text-[11px] text-stone-500 font-light italic">${weddingData.program[0].address}</p>
                                 </div>
 
-                                <div class="w-full h-px bg-stone-100 my-4"></div>
+                                <!-- Séparateur élégant -->
+                                <div class="w-12 h-px bg-amber-700/30 mx-auto"></div>
 
-                                <div class="space-y-4">
-                                    <div class="w-8 h-8 bg-amber-800/10 rounded-full flex items-center justify-center mx-auto text-amber-800">
-                                        <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                <!-- 2. Événement : Soirée Dansante -->
+                                <div class="bg-white p-5 rounded-xl border border-blue-950 text-center space-y-2 max-w-[300px] mx-auto relative z-10 shadow-sm">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <span class="text-xs font-bold text-blue-950 bg-stone-50 px-2.5 py-0.5 rounded-md tracking-wider border border-blue-950/20 inline-block">${weddingData.program[1].date}</span>
+                                        <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">${weddingData.program[1].time}</span>
                                     </div>
-                                    <div class="space-y-2">
-                                        <p class="text-[10px] uppercase tracking-widest font-bold text-red-800">Lieu de réception</p>
-                                        <p class="text-base font-bold serif text-blue-950 tracking-wide leading-tight">${weddingData.location}</p>
-                                        <p class="text-stone-600 font-light text-xs leading-relaxed px-2">${weddingData.address}</p>
-                                    </div>
+                                    <h4 class="text-base font-medium text-blue-950 pt-1">${weddingData.program[1].event}</h4>
+                                    <p class="text-xs text-stone-700 font-medium leading-relaxed">${weddingData.program[1].desc}</p>
+                                    <p class="text-[11px] text-stone-500 font-light italic">${weddingData.program[1].address}</p>
                                     
-                                    <div class="pt-2 text-center">
+                                    <div class="pt-3 text-center">
                                         <a href="${weddingData.mapUrl}" target="_blank" rel="noopener noreferrer" 
-                                           class="inline-flex items-center gap-2 bg-stone-900 text-stone-100 px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider font-medium shadow-sm hover:bg-stone-800 transition-colors">
+                                           class="inline-flex items-center gap-2 bg-stone-900 text-stone-100 px-4 py-2 rounded-xl text-[11px] uppercase tracking-wider font-medium shadow-sm hover:bg-stone-800 transition-colors">
                                             <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-400"></i>
-                                            Ouvrir Google Maps
+                                            Ouvrir Google Maps (Salle)
                                         </a>
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                             <footer class="pt-8 pb-4 text-stone-400 text-[9px] uppercase tracking-[0.35em] border-t border-stone-200/60 mt-12 relative z-30">
