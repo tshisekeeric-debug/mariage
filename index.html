@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitation de Mariage - Israël & trisla</title>
+    <title>Invitation de Mariage - Israël & Trisla</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@200;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -66,22 +66,16 @@
     <script>
         const weddingData = {
             groom: "Israël",
-            bride: "trisla",
+            bride: "Trisla",
+            theme: "Noir & Doré",
             mapUrl: "https://maps.google.com/?q=Salle+Food_market+03,Avenue/Nguma+DGC+Ngaliema+Kinshasa",
             program: [
-                { 
-                    date: "26 Décembre 2026",
-                    time: "", 
-                    event: "Bénédiction Nuptiale", 
-                    desc: "Église de Jésus-Christ de l'Esprit de Vérité / BIMA",
-                    address: "Sise avenue universitaire numéro 9"
-                },
                 { 
                     date: "03 Janvier 2027",
                     time: "18h30", 
                     event: "Soirée Dansante", 
                     desc: "Salle Food market",
-                    address: "103, Avenue Nguma, Q/jolie parc, C/NGALIEMA? Ref/paroisse saint luc, et rawbank"
+                    address: "103, Avenue Nguma, Q/Jolie Parc, C/Ngaliema (Réf. Paroisse Saint-Luc et Rawbank)"
                 }
             ]
         };
@@ -153,7 +147,7 @@
                             </h3>
                             
                             <p class="text-stone-200 text-xs italic font-light pt-2 leading-relaxed px-2 opacity-90">
-                                "Nous sommes heureux de vous annoncer notre mariage et ce serait vraiment un bonheur pour nous de vous compter parmi nos invités ce jour-là"
+                                "Nous sommes heureux de vous annoncer notre mariage et votre présence sera notre plus beau cadeau. Pour ceux qui souhaitent nous témoigner leur générosité, les enveloppes seront les bienvenues"
                             </p>
                             
                             <div class="py-2">
@@ -203,32 +197,21 @@
                                         <div class="h-px flex-1 bg-gradient-to-r from-transparent to-stone-200"></div>
                                         <div class="flex items-center gap-2 text-stone-800">
                                             <i data-lucide="sparkles" class="text-amber-600 w-3.5 h-3.5"></i>
-                                            <h3 class="text-[9px] uppercase tracking-[0.25em] font-bold text-red-800">Programme des Célébrations</h3>
+                                            <h3 class="text-[9px] uppercase tracking-[0.25em] font-bold text-red-800">Programme de la Soirée</h3>
                                         </div>
                                         <div class="h-px flex-1 bg-gradient-to-l from-transparent to-stone-200"></div>
                                     </div>
                                 </div>
 
-                                <!-- 1. Événement : Bénédiction Nuptiale -->
+                                <!-- Programme unique : Soirée Dansante -->
                                 <div class="bg-white p-5 rounded-xl border border-blue-950 text-center space-y-2 max-w-[300px] mx-auto relative z-10 shadow-sm">
-                                    <span class="text-xs font-bold text-blue-950 bg-stone-50 px-2.5 py-0.5 rounded-md tracking-wider border border-blue-950/20 inline-block">${weddingData.program[0].date}</span>
+                                    <div class="flex items-center justify-center gap-2">
+                                        <span class="text-xs font-bold text-blue-950 bg-stone-50 px-2.5 py-0.5 rounded-md tracking-wider border border-blue-950/20 inline-block">${weddingData.program[0].date}</span>
+                                        <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">${weddingData.program[0].time}</span>
+                                    </div>
                                     <h4 class="text-base font-medium text-blue-950 pt-1">${weddingData.program[0].event}</h4>
                                     <p class="text-xs text-stone-700 font-medium leading-relaxed">${weddingData.program[0].desc}</p>
                                     <p class="text-[11px] text-stone-500 font-light italic">${weddingData.program[0].address}</p>
-                                </div>
-
-                                <!-- Séparateur élégant -->
-                                <div class="w-12 h-px bg-amber-700/30 mx-auto"></div>
-
-                                <!-- 2. Événement : Soirée Dansante -->
-                                <div class="bg-white p-5 rounded-xl border border-blue-950 text-center space-y-2 max-w-[300px] mx-auto relative z-10 shadow-sm">
-                                    <div class="flex items-center justify-center gap-2">
-                                        <span class="text-xs font-bold text-blue-950 bg-stone-50 px-2.5 py-0.5 rounded-md tracking-wider border border-blue-950/20 inline-block">${weddingData.program[1].date}</span>
-                                        <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">${weddingData.program[1].time}</span>
-                                    </div>
-                                    <h4 class="text-base font-medium text-blue-950 pt-1">${weddingData.program[1].event}</h4>
-                                    <p class="text-xs text-stone-700 font-medium leading-relaxed">${weddingData.program[1].desc}</p>
-                                    <p class="text-[11px] text-stone-500 font-light italic">${weddingData.program[1].address}</p>
                                     
                                     <div class="pt-3 text-center">
                                         <a href="${weddingData.mapUrl}" target="_blank" rel="noopener noreferrer" 
@@ -236,6 +219,19 @@
                                             <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-400"></i>
                                             Ouvrir Google Maps (Salle)
                                         </a>
+                                    </div>
+                                </div>
+
+                                <!-- Thème de la soirée : Noir & Doré -->
+                                <div class="bg-stone-950 text-amber-300 p-4 rounded-xl border border-amber-500/40 max-w-[300px] mx-auto shadow-md space-y-1.5">
+                                    <div class="flex items-center justify-center gap-1.5 text-[9px] uppercase tracking-[0.25em] text-amber-200/80">
+                                        <i data-lucide="crown" class="w-3.5 h-3.5 text-amber-400"></i>
+                                        <span>Thème de la soirée</span>
+                                    </div>
+                                    <p class="text-base font-semibold serif tracking-wider text-amber-300">${weddingData.theme}</p>
+                                    <div class="flex items-center justify-center gap-2 pt-1">
+                                        <span class="w-3.5 h-3.5 rounded-full bg-black border border-amber-400/60 inline-block" title="Noir"></span>
+                                        <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-amber-600 via-amber-400 to-amber-200 border border-amber-200/60 inline-block" title="Doré"></span>
                                     </div>
                                 </div>
 
