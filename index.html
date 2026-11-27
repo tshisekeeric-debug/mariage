@@ -136,7 +136,7 @@
                 container.innerHTML = `
                     <div class="absolute inset-0 z-50 ethnic-midnight-blue-bg flex flex-col items-center justify-between p-8 cursor-pointer fade-in shadow-inner overflow-hidden" onclick="setView('invitation')">
                         <!-- Photo du couple en arrière-plan avec fusion bleu nuit -->
-                        <div class="absolute inset-0 bg-cover bg-no-repeat opacity-45 mix-blend-luminosity scale-105 animate-subtle-zoom pointer-events-none z-0" style="background-image: url('${weddingData.coverPhoto}'); background-position: center top;"></div>
+                        <div class="absolute inset-0 bg-cover bg-no-repeat opacity-45 mix-blend-luminosity scale-105 animate-subtle-zoom pointer-events-none z-0" style="background-image: url('${weddingData.coverPhoto}'); background-position: center 20%;"></div>
                         <div class="absolute inset-0 bg-gradient-to-b from-[#03071e]/85 via-[#03071e]/60 to-[#03071e]/90 pointer-events-none z-0"></div>
 
                         <div class="w-full flex justify-center pt-4 z-10">
@@ -173,12 +173,14 @@
             else if (view === 'invitation') {
                 container.innerHTML = `
                     <div class="flex-1 overflow-y-auto no-scrollbar scroll-smooth bg-stone-50/40 pb-12 relative">
-                        <!-- Cadre photo encore plus grand (h-[72vh]) et calé tout en haut (center top) -->
-                        <div class="relative h-[72vh] flex items-end justify-center pb-6 overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-stone-50/90 z-10"></div>
-                            <div class="absolute inset-0 bg-cover bg-no-repeat animate-subtle-zoom" style="background-image: url('${weddingData.coverPhoto}'); background-position: center top;"></div>
-                            <div class="relative z-20 text-center px-6 py-2 bg-white/85 backdrop-blur-sm rounded-full shadow-sm border border-white">
-                                <h1 class="text-3xl font-light text-stone-900 tracking-wide">${weddingData.groom} <span class="text-xl font-serif italic text-amber-800">&</span> ${weddingData.bride}</h1>
+                        <!-- Cadre photo ajusté pour afficher le visage d'Israël ET de Trisla -->
+                        <div class="relative bg-[#e4e6eb] pt-4 pb-6 flex flex-col items-center justify-center overflow-hidden">
+                            <div class="w-full h-[46vh] flex items-center justify-center overflow-hidden">
+                                <img src="${weddingData.coverPhoto}" alt="${weddingData.groom} & ${weddingData.bride}" class="w-full h-full object-cover object-[center_22%] animate-subtle-zoom" />
+                            </div>
+                            <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-stone-50 via-stone-50/80 to-transparent z-10"></div>
+                            <div class="relative z-20 -mt-6 text-center px-6 py-2 bg-white/95 backdrop-blur-sm rounded-full shadow-md border border-amber-500/30">
+                                <h1 class="text-2xl font-light text-stone-900 tracking-wide">${weddingData.groom} <span class="text-xl font-serif italic text-amber-800">&</span> ${weddingData.bride}</h1>
                             </div>
                         </div>
 
