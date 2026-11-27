@@ -67,6 +67,7 @@
         const weddingData = {
             groom: "Israël",
             bride: "Trisla",
+            coverPhoto: "photo2.jpeg",
             theme: "Noir & Doré",
             mapUrl: "https://maps.google.com/?q=Salle+Food_market+03,Avenue/Nguma+DGC+Ngaliema+Kinshasa",
             program: [
@@ -133,36 +134,38 @@
             
             if (view === 'envelope') {
                 container.innerHTML = `
-                    <div class="absolute inset-0 z-50 ethnic-midnight-blue-bg flex flex-col items-center justify-between p-8 cursor-pointer fade-in shadow-inner" onclick="setView('invitation')">
-                        <div class="absolute inset-0 bg-black/10 pointer-events-none z-0"></div>
+                    <div class="absolute inset-0 z-50 ethnic-midnight-blue-bg flex flex-col items-center justify-between p-8 cursor-pointer fade-in shadow-inner overflow-hidden" onclick="setView('invitation')">
+                        <!-- Photo du couple en arrière-plan avec fusion bleu nuit -->
+                        <div class="absolute inset-0 bg-cover bg-no-repeat opacity-45 mix-blend-luminosity scale-105 animate-subtle-zoom pointer-events-none z-0" style="background-image: url('${weddingData.coverPhoto}'); background-position: center top;"></div>
+                        <div class="absolute inset-0 bg-gradient-to-b from-[#03071e]/85 via-[#03071e]/60 to-[#03071e]/90 pointer-events-none z-0"></div>
 
                         <div class="w-full flex justify-center pt-4 z-10">
-                            <div class="h-px w-16 bg-white/20"></div>
+                            <div class="h-px w-16 bg-amber-300/30"></div>
                         </div>
                         
                         <div class="text-center space-y-6 my-auto w-full max-w-[320px] z-10 flex flex-col items-center">
-                            <p class="text-amber-200/80 uppercase tracking-[0.25em] text-[10px] font-medium">INVITATION</p>
-                            <h3 class="text-xl text-white uppercase tracking-widest font-light serif">
+                            <p class="text-amber-200/90 uppercase tracking-[0.25em] text-[10px] font-medium drop-shadow">INVITATION</p>
+                            <h3 class="text-xl text-white uppercase tracking-widest font-light serif drop-shadow-md">
                                 ${weddingData.groom} <span class="italic text-amber-300 lowercase text-lg">&</span> ${weddingData.bride}
                             </h3>
                             
-                            <p class="text-stone-200 text-xs italic font-light pt-2 leading-relaxed px-2 opacity-90">
+                            <p class="text-stone-100 text-xs italic font-light pt-2 leading-relaxed px-2 opacity-95 drop-shadow">
                                 "Nous sommes heureux de vous annoncer notre mariage et votre présence sera notre plus beau cadeau. Pour ceux qui souhaitent nous témoigner leur générosité, les enveloppes seront les bienvenues"
                             </p>
                             
                             <div class="py-2">
-                                <p class="text-amber-200/60 italic text-[11px] mb-1">Invitation personnelle pour</p>
-                                <h2 class="text-3xl font-light text-amber-300 serif tracking-wide">${guestInfo.name}</h2>
+                                <p class="text-amber-200/75 italic text-[11px] mb-1 drop-shadow">Invitation personnelle pour</p>
+                                <h2 class="text-3xl font-light text-amber-300 serif tracking-wide drop-shadow-md">${guestInfo.name}</h2>
                             </div>
 
-                            <div class="w-full max-w-[240px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-600 hover:to-amber-600 text-stone-950 text-xs font-bold uppercase tracking-[0.2em] py-3.5 px-6 rounded-full shadow-[0_4px_20px_rgba(245,158,11,0.4)] border border-amber-300/60 flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 active:scale-95 animate-pulse mt-4">
+                            <div class="w-full max-w-[240px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-600 hover:to-amber-600 text-stone-950 text-xs font-bold uppercase tracking-[0.2em] py-3.5 px-6 rounded-full shadow-[0_4px_20px_rgba(245,158,11,0.45)] border border-amber-300/60 flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 active:scale-95 animate-pulse mt-4">
                                 <span>Ouvrir l'invitation</span>
                                 <i data-lucide="chevron-down" class="w-4 h-4 text-stone-950 animate-bounce"></i>
                             </div>
                         </div>
                         
                         <div class="w-full flex justify-center pb-4 z-10">
-                            <div class="h-px w-16 bg-white/10"></div>
+                            <div class="h-px w-16 bg-amber-300/20"></div>
                         </div>
                     </div>
                 `;
@@ -170,15 +173,16 @@
             else if (view === 'invitation') {
                 container.innerHTML = `
                     <div class="flex-1 overflow-y-auto no-scrollbar scroll-smooth bg-stone-50/40 pb-12 relative">
-                        <div class="relative h-[45vh] flex items-end justify-center pb-12 overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-b from-stone-900/20 via-transparent to-stone-50 z-10"></div>
-                            <div class="absolute inset-0 bg-[url('ma-photo.jpg')] bg-cover bg-center scale-105 animate-subtle-zoom"></div>
-                            <div class="relative z-20 text-center px-4 space-y-2">
-                                <h1 class="text-4xl font-light text-stone-900 tracking-wide">${weddingData.groom} <span class="text-2xl font-serif italic text-amber-800">&</span> ${weddingData.bride}</h1>
+                        <!-- Cadre photo encore plus grand (h-[72vh]) et calé tout en haut (center top) -->
+                        <div class="relative h-[72vh] flex items-end justify-center pb-6 overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-stone-50/90 z-10"></div>
+                            <div class="absolute inset-0 bg-cover bg-no-repeat animate-subtle-zoom" style="background-image: url('${weddingData.coverPhoto}'); background-position: center top;"></div>
+                            <div class="relative z-20 text-center px-6 py-2 bg-white/85 backdrop-blur-sm rounded-full shadow-sm border border-white">
+                                <h1 class="text-3xl font-light text-stone-900 tracking-wide">${weddingData.groom} <span class="text-xl font-serif italic text-amber-800">&</span> ${weddingData.bride}</h1>
                             </div>
                         </div>
 
-                        <div class="p-8 text-center space-y-6 relative z-30">
+                        <div class="p-8 pt-2 text-center space-y-6 relative z-30">
                             
                             <section class="bg-white p-5 rounded-2xl border border-stone-200/60 shadow-sm space-y-2 relative z-30">
                                 <p class="text-[9px] uppercase tracking-widest text-red-800 font-medium">Place réservée pour</p>
